@@ -1,5 +1,16 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { jost } from './assets/fonts'
+import Navegation from './components/navegation'
+import logoHead from "../app/assets/shared/desktop/logo-dark.png";
+import Information from './components/info';
+import Image from 'next/image';
+import logoFot from "../app/assets/shared/desktop/logo-light.png"
+import facebook from "../app/assets/shared/desktop/icon-facebook.svg"
+import youtube from "../app/assets/shared/desktop/icon-youtube.svg"
+import twitter from "../app/assets/shared/desktop/icon-twitter.svg"
+import pinterest from "../app/assets/shared/desktop/icon-pinterest.svg"
+import instagram from "../app/assets/shared/desktop/icon-instagram.svg"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,7 +22,29 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${jost.className} pt-16`}>
+        <header className='container mx-auto'>
+          <Navegation logo={logoHead} classprop={"flex items-center justify-between pb-16"} />
+        </header>
+        {children}
+        <footer className='bg-foot py-32 relative'>
+          <div className='grid gap-24 container mx-auto'>
+            <Navegation logo={logoFot} classprop={"flex justify-between items-center text-white after:content-normal after:absolute after:w-11/12 after:h-px after:bg-line after:top-52"} />
+            <div className='flex justify-between'>
+              <Information first={"Designo Central Office"} second={"3886 Wellington Street"} thrid={"Toronto, Ontario M9C 3J5"}/>
+              <Information first={"Contact Us (Central Office)"} second={"P : +1 253-863-8967"} thrid={"M : contact@designo.com"} />
+
+              <ul className='flex gap-4 '>
+                <li><Image src={facebook} alt='facebook link' width={35}></Image></li>
+                <li><Image src={youtube} alt='facebook link' width={35}></Image></li>
+                <li><Image src={twitter} alt='facebook link' width={35}></Image></li>
+                <li><Image src={pinterest} alt='facebook link' width={35}></Image></li>
+                <li><Image src={instagram} alt='facebook link' width={35}></Image></li>
+              </ul>
+            </div>
+          </div>
+        </footer>
+      </body>
     </html>
   )
 }

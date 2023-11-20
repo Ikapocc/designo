@@ -1,14 +1,15 @@
+import Views from "@/app/components/views";
 import Image from "next/image";
+import Link from "next/link";
 import data from "src/app/data.json"
 
 export default async function page({params}) {
-
+    console.log(params.id);
     const {datos} = data.find(item => item.id === params.id)
-    console.log(datos);
 
     return(
         <main>
-            <section className="container mx-auto flex flex-col gap-32">
+            <section className="container mx-auto flex flex-col gap-36">
                 {datos.map(items => (
                     <>
                         <div className="flex flex-col gap-8 justify-center items-center bg-peach text-white rounded-3xl py-28" key={params.id}>
@@ -28,7 +29,25 @@ export default async function page({params}) {
                         </div>
                     </>
                 ))}
-            </section>
+
+                <div className="flex justify-center gap-8">
+                    {params.id === "web-desing" ? 
+                    <>
+                        <Views title={"APP DESIGN"} imageUrl={"/images/home/desktop/image-app-design.jpg"} linkTo={"app-desing"}/>
+                        <Views title={"GRAPHIC DESIGN"} imageUrl={"/images/home/desktop/image-graphic-design.jpg"} linkTo={"graphic-desing"}/>
+                    </> : params.id === "app-desing" ?
+
+                    <>
+                        <Views title={"WEB DESIGN"} imageUrl={"/images/home/desktop/image-web-design-large.jpg"} linkTo={"web-desing"}/>
+                        <Views title={"GRAPHIC DESIGN"} imageUrl={"/images/home/desktop/image-graphic-design.jpg"} linkTo={"graphic-desing"}/>
+                    </> :
+                    <>
+                        <Views title={"WEB DESIGN"} imageUrl={"/images/home/desktop/image-web-design-large.jpg"} linkTo={"web-desing"}/>
+                        <Views title={"APP DESIGN"} imageUrl={"/images/home/desktop/image-app-design.jpg"} linkTo={"app-desing"}/>
+                    </>
+                    }
+                </div>
+            </section>    
         </main>
     )
 }
